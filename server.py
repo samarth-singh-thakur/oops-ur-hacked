@@ -6,9 +6,15 @@ from pathlib import Path
 from typing import Iterator
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from webcam_capture import capture_photo
 app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    """Serve the main HTML page"""
+    return FileResponse("index.html")
 
 
 def get_image_path() -> str:
